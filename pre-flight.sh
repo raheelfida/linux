@@ -47,11 +47,20 @@ echo
 echo "Username: $NEW_USER"
 echo "Password: $RANDOM_PASSWORD"
 
-CREDENTIAL_FILE="~/credentials.txt"
-echo "Username: $NEW_USER" > "$CREDENTIAL_FILE"
-echo "Password: $RANDOM_PASSWORD" >> "$CREDENTIAL_FILE"
+CREDENTIAL_FILE="$HOME/credentials.txt"
+
+# Ensure the file exists before writing
+touch "$CREDENTIAL_FILE"
+
+# Write credentials
+{
+    echo "Username: $NEW_USER"
+    echo "Password: $RANDOM_PASSWORD"
+} > "$CREDENTIAL_FILE"
+
 chmod 600 "$CREDENTIAL_FILE"
 echo "Credentials saved to $CREDENTIAL_FILE"
+
 echo
 
 # 8. Force password change on first login
